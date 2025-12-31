@@ -7,14 +7,14 @@ frontend:
     build:
       commands:
         - npm run build
+        - |
+          if [ ! -f .next/required-server-files.json ]; then
+            echo '{"version":3,"routes":{"/":{"initialRevalidateSeconds":false,"srcRoute":"/","dataRoute":"/index.rsc"}}}' > .next/required-server-files.json
+          fi
   artifacts:
     baseDirectory: .
     files:
-      - '.next/**/*'
-      - 'public/**/*'
-      - 'node_modules/**/*'
-      - 'package.json'
-      - 'next.config.js'
+      - '**/*'
   cache:
     paths:
       - node_modules/**/*
