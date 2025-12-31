@@ -8,8 +8,10 @@ frontend:
       commands:
         - npm run build
         - |
-          if [ ! -f .next/required-server-files.json ]; then
-            echo '{"version":3,"routes":{"/":{"initialRevalidateSeconds":false,"srcRoute":"/","dataRoute":"/index.rsc"}}}' > .next/required-server-files.json
+          if [ -f .next/required-server-files.json ]; then
+            cp .next/required-server-files.json required-server-files.json
+          else
+            echo '{"version":3,"routes":{"/":{"initialRevalidateSeconds":false,"srcRoute":"/","dataRoute":"/index.rsc"}}}' > required-server-files.json
           fi
   artifacts:
     baseDirectory: .
