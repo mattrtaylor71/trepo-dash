@@ -1,0 +1,12 @@
+# Files to ignore during Amplify build
+.env.local
+.env*.local
+node_modules
+.next/cache
+.git
+.gitignore
+README.md
+DEPLOY.md
+*.md
+.DS_Store
+
