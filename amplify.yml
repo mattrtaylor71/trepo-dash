@@ -15,5 +15,4 @@ frontend:
     paths:
       - node_modules/**/*
       - .next/cache/**/*
-appRoot: "Cursor Projects/trepo_dash"
 
