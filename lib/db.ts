@@ -6,12 +6,16 @@
 
 import mysql from 'mysql2/promise'
 
-// Database configuration
+// Database configuration - all environment variables are required
+if (!process.env.DB_USER || !process.env.DB_HOST || !process.env.DB_NAME || !process.env.DB_PASSWORD) {
+  throw new Error('Missing required database environment variables: DB_USER, DB_HOST, DB_NAME, and DB_PASSWORD must be set')
+}
+
 const dbConfig = {
-  user: process.env.DB_USER || 'admin',
-  host: process.env.DB_HOST || 'database-1.cvig8u6s25dz.us-east-1.rds.amazonaws.com',
-  database: process.env.DB_NAME || 'mysqlTutorial',
-  password: process.env.DB_PASSWORD || '', // Must be set via environment variable
+  user: process.env.DB_USER!,
+  host: process.env.DB_HOST!,
+  database: process.env.DB_NAME!,
+  password: process.env.DB_PASSWORD!,
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
@@ -21,10 +25,6 @@ const dbConfig = {
  * Creates a new MySQL connection
  */
 export async function getConnection() {
-  if (!dbConfig.password) {
-    throw new Error('DB_PASSWORD environment variable is required')
-  }
-
   const connection = await mysql.createConnection({
     host: dbConfig.host,
     user: dbConfig.user,

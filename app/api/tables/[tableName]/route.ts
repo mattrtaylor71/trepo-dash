@@ -3,6 +3,11 @@ import { executeQuery, getConnection } from '@/lib/db'
 import mysql from 'mysql2/promise'
 import { convertToLATime } from '@/lib/utils'
 
+// Force Node.js runtime and dynamic rendering (prevent static prerendering)
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 /**
  * API Route to fetch data from a specific table
  */

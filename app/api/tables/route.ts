@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server'
 import { executeQuery } from '@/lib/db'
 
+// Force Node.js runtime and dynamic rendering (prevent static prerendering)
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 /**
  * API Route to discover tables ending with "_new_feed"
  */

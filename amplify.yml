@@ -3,21 +3,12 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm install
+        - npm ci
     build:
       commands:
         - npm run build
-        - echo '{"version":3,"routes":{"/":{"initialRevalidateSeconds":false,"srcRoute":"/","dataRoute":"/index.rsc"}}}' > required-server-files.json
-        - |
-          if [ -f .next/trace ]; then
-            cp .next/trace trace
-            echo "Trace file copied to root"
-          else
-            echo "Warning: .next/trace not found"
-          fi
-        - ls -la required-server-files.json trace 2>/dev/null || echo "Some files missing"
   artifacts:
-    baseDirectory: .
+    baseDirectory: .next
     files:
       - '**/*'
   cache:
